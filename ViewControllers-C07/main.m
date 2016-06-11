@@ -7,7 +7,8 @@
 //
 
 //#define TBVC_02
-#define TBVC_04
+//#define TBVC_04
+#define TBVC_05
 //#define TBVC_06
 
 #import <UIKit/UIKit.h>
@@ -27,6 +28,10 @@
     
 #ifdef TBVC_02
     TBVC_02_ModalStyle *tbvc = [[TBVC_02_ModalStyle alloc]init];
+#endif
+    
+#ifdef TBVC_05
+    TBVC_05_TabBarController *tbvc = [[TBVC_05_TabBarController alloc]init];
 #endif
     
 #ifdef TBVC_06
