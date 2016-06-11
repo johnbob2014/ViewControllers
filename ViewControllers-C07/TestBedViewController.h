@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TBVC_06_PageController : UIViewController
+@interface TBVC_02_ModalStyle : UIViewController
+@end
 
+@interface TBVC_04_Universal_DetailVC : UIViewController
+@end
+@interface TBVC_04_Universal_ColorTVC : UITableViewController
+@end
+
+@interface TBVC_06_PageController : UIViewController
 @end

@@ -8,6 +8,10 @@
 
 #import "GCBookController.h"
 
+@interface GCBookController ()
+@property (nonatomic) NSUInteger pageNumber;
+@end
+
 @implementation GCBookController
 
 #pragma mark - Init
