@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TestBedViewController.h
 //  ViewControllers-C07
 //
 //  Created by 张保国 on 16/6/11.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface TBVC_06_PageController : UIViewController
 
 @end
-
