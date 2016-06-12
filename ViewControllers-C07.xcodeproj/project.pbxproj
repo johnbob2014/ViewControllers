@@ -13,6 +13,7 @@
 		1E0BD26A1D0BA2F7001D31B9 /* TestBedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0BD2691D0BA2F7001D31B9 /* TestBedViewController.m */; };
 		1E0BD26E1D0BA3AF001D31B9 /* GCBookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0BD26D1D0BA3AF001D31B9 /* GCBookController.m */; };
 		1E69E1F01D0C1A45001E6321 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E69E1EF1D0C1A45001E6321 /* UIView+AutoLayout.m */; };
+		4BEF7EBF1D0D4BCD0043033A /* FlipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEF7EBE1D0D4BCD0043033A /* FlipViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,8 @@
 		1E0BD26D1D0BA3AF001D31B9 /* GCBookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCBookController.m; path = "06-PageController/GCBookController/GCBookController.m"; sourceTree = "<group>"; };
 		1E69E1EE1D0C1A45001E6321 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
 		1E69E1EF1D0C1A45001E6321 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		4BEF7EBD1D0D4BCD0043033A /* FlipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlipViewController.h; path = "07-ViewControllerContainer/FlipViewController.h"; sourceTree = "<group>"; };
+		4BEF7EBE1D0D4BCD0043033A /* FlipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlipViewController.m; path = "07-ViewControllerContainer/FlipViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +69,7 @@
 				1E0BD2681D0BA2F7001D31B9 /* TestBedViewController.h */,
 				1E0BD2691D0BA2F7001D31B9 /* TestBedViewController.m */,
 				1E0BD26B1D0BA355001D31B9 /* 06-PageController */,
+				4BEF7EBC1D0D4A250043033A /* 07-ViewControllerContainer */,
 				1E0BD25C1D0BA0B1001D31B9 /* Assets.xcassets */,
 				1E0BD25E1D0BA0B1001D31B9 /* LaunchScreen.storyboard */,
 				1E0BD2611D0BA0B1001D31B9 /* Info.plist */,
@@ -97,6 +101,15 @@
 				1E69E1EF1D0C1A45001E6321 /* UIView+AutoLayout.m */,
 			);
 			path = "UIView+AutoLayout";
+			sourceTree = "<group>";
+		};
+		4BEF7EBC1D0D4A250043033A /* 07-ViewControllerContainer */ = {
+			isa = PBXGroup;
+			children = (
+				4BEF7EBD1D0D4BCD0043033A /* FlipViewController.h */,
+				4BEF7EBE1D0D4BCD0043033A /* FlipViewController.m */,
+			);
+			name = "07-ViewControllerContainer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +185,7 @@
 				1E69E1F01D0C1A45001E6321 /* UIView+AutoLayout.m in Sources */,
 				1E0BD26E1D0BA3AF001D31B9 /* GCBookController.m in Sources */,
 				1E0BD2521D0BA0B1001D31B9 /* main.m in Sources */,
+				4BEF7EBF1D0D4BCD0043033A /* FlipViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
