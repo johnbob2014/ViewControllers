@@ -21,3 +21,6 @@
 
 @interface TBVC_06_PageController : UIViewController
 @end
+
+@interface TBVC_07_ViewControllerContainer : UIViewController
+@end

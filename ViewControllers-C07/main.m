@@ -8,8 +8,9 @@
 
 //#define TBVC_02
 //#define TBVC_04
-#define TBVC_05
+//#define TBVC_05
 //#define TBVC_06
+#define TBVC_07
 
 #import <UIKit/UIKit.h>
 #import "Utility.h"
@@ -36,6 +37,10 @@
     
 #ifdef TBVC_06
     TBVC_06_PageController *tbvc = [[TBVC_06_PageController alloc]init];
+#endif
+    
+#ifdef TBVC_07
+    TBVC_07_ViewControllerContainer *tbvc = [[TBVC_07_ViewControllerContainer alloc] init];
 #endif
     
     UIViewController *rootVC = nil;

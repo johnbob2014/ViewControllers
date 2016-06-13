@@ -407,5 +407,49 @@ didSelectViewController:(UIViewController *)viewController{
     
     return controller;
 }
-
 @end
+
+#pragma mark - TBVC_07_ViewControllerContainer
+#import "FlipViewController.h"
+
+@implementation TBVC_07_ViewControllerContainer
+
+- (void)loadView{
+    self.view = [[UIView alloc] init];
+    self.view.backgroundColor = [UIColor grayColor];
+    self.navigationItem.leftBarButtonItem = BARBUTTON(@"Modal", @selector(modal:));
+    self.navigationItem.rightBarButtonItem = BARBUTTON(@"Push", @selector(push:));
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        FlipViewController *flip = [self createAFlipVC];
+        flip.view.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addChildViewController:flip];
+        [self.view addSubview:flip.view];
+        [flip.view autoCenterInSuperview];
+        [flip.view autoSetDimensionsToSize:CGSizeMake(400, 300)];
+        [flip didMoveToParentViewController:self];
+    }
+}
+
+- (void)modal:(id)sender{
+    [self.navigationController presentViewController:[self createAFlipVC] animated:YES completion:nil];
+}
+
+- (void)push:(id)sender{
+    [self.navigationController pushViewController:[self createAFlipVC] animated:YES];
+}
+
+- (FlipViewController *)createAFlipVC{
+    UIViewController *blueVC = [[UIViewController alloc] init];
+    blueVC.view.backgroundColor = [UIColor blueColor];
+    UIViewController *cyanVC = [[UIViewController alloc] init];
+    cyanVC.view.backgroundColor = [UIColor cyanColor];
+    
+    FlipViewController *flipVC = [[FlipViewController alloc] initWithFrontController:blueVC andBackController:cyanVC];
+    flipVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    flipVC.modalPresentationStyle = UIModalPresentationFormSheet;
+    
+    return flipVC;
+}
+@end
+
