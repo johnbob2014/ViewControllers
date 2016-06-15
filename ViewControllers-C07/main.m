@@ -6,11 +6,12 @@
 //  Copyright © 2016年 ZhangBaoGuo. All rights reserved.
 //
 
-//#define TBVC_02
+#define TBVC_02
 //#define TBVC_04
 //#define TBVC_05
 //#define TBVC_06
-#define TBVC_07
+//#define TBVC_07
+//#define TBVC_08
 
 #import <UIKit/UIKit.h>
 #import "Utility.h"
@@ -41,6 +42,10 @@
     
 #ifdef TBVC_07
     TBVC_07_ViewControllerContainer *tbvc = [[TBVC_07_ViewControllerContainer alloc] init];
+#endif
+    
+#ifdef TBVC_08
+    TBVC_08_CustomSegue *tbvc = [[TBVC_08_CustomSegue alloc] init];
 #endif
     
     UIViewController *rootVC = nil;

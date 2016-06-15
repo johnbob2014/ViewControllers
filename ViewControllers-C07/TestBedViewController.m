@@ -453,3 +453,125 @@ didSelectViewController:(UIViewController *)viewController{
 }
 @end
 
+#pragma mark - TBVC_08_CustomSegue
+#import "RotatingCustomSegue.h"
+#define Inset_Float 50.0
+
+@implementation TBVC_08_CustomSegue{
+    NSArray *childControllers;
+    UIView *backSplashView;
+    UIPageControl *pageControl;
+    int vcIndex;
+    int nextIndex;
+}
+
+- (BOOL)prefersStatusBarHidden{
+    return YES;
+}
+
+- (void)loadView{
+    self.view = [[UIView alloc] init];
+    self.view.backgroundColor = [UIColor blackColor];
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    
+    // Create backSplash for animation support
+    backSplashView = [UIView newAutoLayoutView];
+    [self.view addSubview:backSplashView];
+    //[backSplashView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(50, 50, -50, -50)];
+    [backSplashView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+    
+    // Add a page view controller
+    pageControl = [UIPageControl newAutoLayoutView];
+    pageControl.currentPage = 0;
+    pageControl.numberOfPages = 4;
+    pageControl.userInteractionEnabled = NO;
+    [self.view addSubview:pageControl];
+    [pageControl autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+    
+    // Load child array from storyboard
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"child" bundle:[NSBundle mainBundle]];
+    childControllers = @[[storyboard instantiateViewControllerWithIdentifier:@"0"],
+                         [storyboard instantiateViewControllerWithIdentifier:@"1"],
+                         [storyboard instantiateViewControllerWithIdentifier:@"2"],
+                         [storyboard instantiateViewControllerWithIdentifier:@"3"]];
+    
+    UISwipeGestureRecognizer *leftSwipeGR = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(progress:)];
+    leftSwipeGR.direction = UISwipeGestureRecognizerDirectionLeft;
+    leftSwipeGR.numberOfTouchesRequired = 1;
+    [self.view addGestureRecognizer:leftSwipeGR];
+    
+    UISwipeGestureRecognizer *rightSwipeGR = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(regress:)];
+    rightSwipeGR.direction = UISwipeGestureRecognizerDirectionRight;
+    rightSwipeGR.numberOfTouchesRequired = 1;
+    [self.view addGestureRecognizer:rightSwipeGR];
+    
+    // Set each child's tag
+    for (UIViewController *controller in childControllers)
+    {
+        controller.view.tag = 1066;
+    }
+    
+    // Initialize scene with first child controller
+    vcIndex = 0;
+    UIViewController *controller = [childControllers firstObject];
+    [self addChildViewController:controller];
+    [backSplashView addSubview:controller.view];
+    controller.view.translatesAutoresizingMaskIntoConstraints = NO;
+    [controller.view autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(Inset_Float, Inset_Float, Inset_Float, Inset_Float)];
+    [controller didMoveToParentViewController:self];
+}
+
+// Go forward
+- (void)progress:(id)sender
+{
+    int newIndex = ((vcIndex + 1) % childControllers.count);
+    [self switchToView:newIndex goingForward:YES];
+}
+
+// Go backwards
+- (void)regress:(id) sender
+{
+    int newIndex = vcIndex - 1;
+    if (newIndex < 0) newIndex = childControllers.count - 1;
+    [self switchToView:newIndex goingForward:NO];
+}
+
+// Transition to new view using custom segue
+- (void)switchToView:(int)newIndex goingForward:(BOOL)goesForward{
+    if (vcIndex == newIndex) return;
+    
+    nextIndex = newIndex;
+    // Segue to the new controller
+    UIViewController *sourceVC = [childControllers objectAtIndex:vcIndex];
+    UIViewController *destinationVC = [childControllers objectAtIndex:newIndex];
+    destinationVC.view.bounds = sourceVC.view.bounds;
+    [sourceVC.view removeConstraints:sourceVC.view.constraints];
+    [sourceVC willMoveToParentViewController:nil];
+    [self addChildViewController:destinationVC];
+    
+    RotatingCustomSegue *segue = [[RotatingCustomSegue alloc] initWithIdentifier:@"segue" source:sourceVC destination:destinationVC];
+    segue.goesForward = goesForward;
+    segue.segueDidCompleteHandler = ^(){
+        UIViewController *sourceVC = [childControllers objectAtIndex:vcIndex];
+        UIViewController *destinationVC = [childControllers objectAtIndex:nextIndex];
+        
+        //[sourceVC.view removeFromSuperview]; //在RotatingCustomSegue中实现
+        [sourceVC removeFromParentViewController];
+        
+        [destinationVC didMoveToParentViewController:self];
+        //[backSplashView addSubview:destinationVC.view]; //在RotatingCustomSegue中实现
+        destinationVC.view.translatesAutoresizingMaskIntoConstraints = NO;
+        [destinationVC.view autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(Inset_Float, Inset_Float, Inset_Float, Inset_Float)];
+        
+        vcIndex = newIndex;
+        pageControl.currentPage = vcIndex;
+    };
+    [segue perform];
+}
+
+
+@end
